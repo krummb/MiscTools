@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Other Tools(beta)</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<style>
+
+input{
+width: 100px;
+}
+  
+.jumbotron {
+background-color: #f4511e;
+color: #ffffff;
+padding: 100px 25px;
+}
+
+
+.container-fluid {
+padding: 60px 50px;
+}
+
+.bg-grey {
+    background-color: #f6f6f6;
+}
+
+textarea {
+	width: 50%;
+	height: 100px;
+	border: 1px solid #abc;
+	margin: 0 auto;
+	text-transform:none;
+	resize: none;
+	color: black;
+}
+
+</style>
+
+
+
+
+<div class="jumbotron text-center">
+<h1>Misc Tools (beta)</h1>
+
+</div>
+
+<div class = 'container-fluid text-center bg-darkgrey'>
+<h3>Pricing Calculator</h3>
+
+
+<input placeholder="Part Price" id="pricing" onchange="pricing()"></input>  <button id="priceButton" onclick=pricing()>Pricing</button>
+<br>
+<br>
+<input placeholder="Overhead" value="1.2" id="overhead"></input>
+<input type="checkbox" id="overheadBox">Overhead</input>
+<br>
+<br>
+<input placeholder="Multiplier" value="4.67" id="multiplier"></input>
+<br>
+<br>
+<div>
+<span><input type="text" id="US"></span>
+<button onclick=copy("US")>US</button>
+</div>
+<br>
+<div>
+<span><input type="text" id="EUR"></span>
+<button onclick=copy("EUR")> EUR</button>
+</div>
+<br>
+<div> 
+<span><input type="text" id="UK"></span>
+<button onclick=copy("UK")>UK</button>
+</div>
+<br>
+<div> 
+<span><input type="text" id="PLN"></span>
+<button onclick=copy("PLN")>PLN</button>
+</div>
+</div>
+
+<div class = 'container-fluid text-center bg-grey'>
+Enter text below to convert to uppercase for SFDC:
+<br></br>
+<textarea id="UC" onkeyup="capital()" placeholder="Enter your lowercase text here"></textarea>
+</div>
+
+<div class = 'container-fluid text-center bg-darkgrey'>
+Paste backwards text.  Use CTRL to toggle.
+<br></br>
+<textarea id="backward" onkeyup=backwards() placeholder="Enter your backwards text here"></textarea>
+</div>
+
+<div class = 'container-fluid text-center bg-grey'>
+Enter text below to convert to uppercase for SFDC:
+<br></br>
+<textarea id="UC" onkeyup="capital()" placeholder="Enter your lowercase text here" maxlength=50px></textarea>
+<div id="10"> 10% - <b><span id="10p">df</span></b></div>
+<div id="20"> 20% - <b><span id="20p">df</span></b></div>
+<div id="30"> 30% - <b><span id="30p">df</span></b></div>
+<div id="40"> 40% - <b><span id="40p">df</span></b></div>
+<div id="50"> 50% - <b><span id="50p">df</span></b></div>
+</div>
+
+
+<script>
+
+function pricing(){
+let x = document.getElementById("pricing").value
+let y = document.getElementById("overhead").value
+let z = document.getElementById("multiplier").value
+let US = document.getElementById("US")
+let EUR = document.getElementById("EUR")
+let UK = document.getElementById("UK")
+let overhead = document.getElementById("overheadBox")
+
+if(overhead.checked == true){
+let a = x*y;
+
+US.value = parseFloat(a*z).toFixed(2);
+EUR.value = parseFloat((a*z)*.85).toFixed(2);
+UK.value = parseFloat((a*z)*.75).toFixed(2);
+PLN.value = parseFloat((a*z)*3.84).toFixed(2);
+} else {
+US.value = parseFloat(x*z).toFixed(2);
+EUR.value = parseFloat((x*z)*.85).toFixed(2);
+UK.value = parseFloat((x*z)*.75).toFixed(2);
+PLN.value = parseFloat((x*z)*3.84).toFixed(2);
+}
+}
+
+function capital() {
+var x = document.getElementById("UC");
+x.value = x.value.toUpperCase();
+}
+
+function backwards(str) {
+var y = document.getElementById('backward');
+y.value = y.value.split("").reverse().join("");
+// return str.split("").reverse().join("");
+}
+
+function copy(things){
+let x = things
+const copyText = document.getElementById(x)
+copyText.select();
+copyText.setSelectionRange(0, 99999);
+document.execCommand("copy");
+}
+
+</script>
+
+</body>
+</html>
